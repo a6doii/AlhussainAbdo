@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Alhussain Abdo - Portfolio</title>
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+  <style>
+    :root {
+      --bg-color: #f9f9f9;
+      --text-color: #333;
+      --header-bg: #111;
+      --header-text: #fff;
+      --btn-bg: #007BFF;
+      --btn-hover: #0056b3;
+      --box-bg: #eee;
+    }
+    body.dark {
+      --bg-color: #121212;
+      --text-color: #f1f1f1;
+      --header-bg: #1e1e1e;
+      --header-text: #fff;
+      --btn-bg: #0d6efd;
+      --btn-hover: #0a58ca;
+      --box-bg: #1e1e1e;
+    }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+      font-family: 'Segoe UI', sans-serif;
+      transition: background 0.3s, color 0.3s;
+    }
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      line-height: 1.6;
+      padding-top: 70px;
+    }
+    #preloader {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      background: var(--bg-color);
+      z-index: 2000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .spinner {
+      width: 50px;
+      height: 50px;
+      border: 5px solid #ccc;
+      border-top: 5px solid var(--btn-bg);
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: var(--header-bg);
+      z-index: 1000;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      flex-wrap: wrap;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    }
+    nav .links a {
+      color: var(--header-text);
+      text-decoration: none;
+      margin: 0 1rem;
+      font-size: 1rem;
+    }
+    nav .links a:hover {
+      color: #0af;
+    }
+    nav .toggle-btn {
+      cursor: pointer;
+      background: none;
+      border: 1px solid var(--header-text);
+      color: var(--header-text);
+      padding: 5px 10px;
+      border-radius: 5px;
+      margin: 5px;
+    }
+    header {
+      background: var(--header-bg);
+      color: var(--header-text);
+      padding: 2rem;
+      text-align: center;
+      animation: slideDown 1s ease-out forwards;
+    }
+    @keyframes slideDown {
+      from { opacity: 0; transform: translateY(-30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    header img {
+      width: 150px;
+      height: 150px;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 3px solid var(--btn-bg);
+    }
+    header h1 {
+      margin-bottom: 0.5rem;
+      font-size: 2.5rem;
+    }
+    header a {
+      color: #0af;
+      text-decoration: none;
+    }
+    .header-content {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 2rem;
+    }
+    section {
+      padding: 3rem 2rem;
+      max-width: 900px;
+      margin: 3rem auto;
+      border-radius: 12px;
+      background-color: var(--box-bg);
+      box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+      opacity: 0;
+      transform: translateY(40px) scale(0.98);
+      transition: all 0.6s ease;
+    }
+    section.show {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+    section:nth-of-type(even) {
+      background-color: rgba(0, 123, 255, 0.05);
+    }
+    h2 {
+      color: var(--text-color);
+      margin-bottom: 1rem;
+      font-size: 1.8rem;
+    }
+    .btn {
+      display: inline-block;
+      background: var(--btn-bg);
+      color: white;
+      padding: 0.5rem 1rem;
+      border-radius: 5px;
+      text-decoration: none;
+      transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s;
+    }
+    .btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 10px #007BFF80;
+      background: var(--btn-hover);
+    }
+    .contact-box {
+      background: var(--box-bg);
+      padding: 1rem;
+      border-radius: 10px;
+    }
+    .contact-box input,
+    .contact-box textarea {
+      width: 100%;
+      padding: 0.5rem;
+      margin-bottom: 0.5rem;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 1rem;
+      background: white;
+    }
+    body.dark .contact-box input,
+    body.dark .contact-box textarea {
+      background: #333;
+      color: white;
+      border-color: #555;
+    }
+    footer {
+      text-align: center;
+      padding: 1rem;
+      background: var(--header-bg);
+      color: var(--header-text);
+      margin-top: 2rem;
+    }
+    .icon-bounce {
+      display: inline-block;
+      margin-right: 10px;
+      animation: bounceIn 1s ease;
+      color: #007BFF;
+    }
+    @keyframes bounceIn {
+      0% { opacity: 0; transform: scale(0.3) translateY(-100px); }
+      50% { opacity: 1; transform: scale(1.1) translateY(10px); }
+      100% { transform: scale(1) translateY(0); }
+    }
+    @media (max-width: 768px) {
+      .header-content {
+        flex-direction: column;
+        text-align: center;
+      }
+      nav {
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+      nav .links {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 1rem;
+      }
+      header img {
+        width: 120px;
+        height: 120px;
+      }
+      h1 {
+        font-size: 1.8rem;
+      }
+      section {
+        padding: 2rem 1rem;
+        margin: 2rem 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div id="preloader"><div class="spinner"></div></div>
+  <nav>
+    <div class="links">
+      <a href="#summary">About</a>
+      <a href="#projects">Projects</a>
+      <a href="#skills">Skills</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <button class="toggle-btn" id="modeToggle">🌙 Dark Mode</button>
+  </nav>
+  <header>
+    <div class="header-content">
+      <img src="profile.jpg" alt="Alhussain Abdo" />
+      <div>
+        <h1>Alhussain Abdo</h1>
+        <p>Computer Science Student | AI & Embedded Systems Enthusiast</p>
+        <a href="mailto:abdohussin026@gmail.com">abdohussin026@gmail.com</a> |
+        <a href="https://linkedin.com/in/a6do/" target="_blank">LinkedIn</a> |
+        <a href="https://github.com/a6doii" target="_blank">GitHub</a>
+      </div>
+    </div>
+  </header>
+  <section id="summary">
+    <h2><i class="fas fa-user icon-bounce"></i> About Me</h2>
+    <p>A third-year student at Cairo University, studying Computer Science. Passionate about artificial intelligence and embedded systems.</p>
+  </section>
+  <section id="projects">
+    <h2><i class="fas fa-briefcase icon-bounce"></i> Projects</h2>
+    <div class="project">
+      <strong>2D Drawing Application</strong> - <a class="btn" href="https://github.com/a6doii/2D_Drawing_Application" target="_blank">GitHub</a>
+      <p>Draws, saves, and loads shapes with various algorithms using C++ and WinAPI.</p>
+    </div>
+    <div class="project">
+      <strong>Bookly</strong> - <a class="btn" href="https://a6doii.github.io/Bookly/" target="_blank">Website</a>
+      <p>Library management front-end using HTML/CSS/JS, Django, and OOP concepts.</p>
+    </div>
+    <div class="project">
+      <strong>Bank Database System</strong>
+      <p>Client/Employee system using WinAPI and SQL Server. Built ERD and DB schema.</p>
+    </div>
+    <div class="project">
+      <strong>Tic Tac Toe</strong> - <a class="btn" href="https://github.com/a6doii/Tic_Tac_Toe" target="_blank">GitHub</a>
+      <p>Multiple modes (9x9, four-in-a-row), console-based game with clean logic.</p>
+    </div>
+    <div class="project">
+      <strong>Vole Machine</strong> - <a class="btn" href="https://github.com/a6doii/Vole-Machine" target="_blank">GitHub</a>
+      <p>Hex instruction simulator using machine language and OOP concepts.</p>
+    </div>
+  </section>
+  <section id="skills">
+    <h2><i class="fas fa-gears icon-bounce"></i> Skills</h2>
+    <p><strong>Languages & Tools:</strong> HTML/CSS, JavaScript, C/C++, Python, SQL, Django, Java, Assembly</p>
+    <p><strong>Concepts:</strong> OOP, Design Patterns, SOLID, Algorithms & DS</p>
+    <p><strong>Soft Skills:</strong> Communication, Teamwork, Presentation, Adaptability</p>
+    <p><strong>Other:</strong> Git, Adobe Premiere Pro</p>
+  </section>
+  <section id="contact">
+    <h2><i class="fas fa-envelope icon-bounce"></i> Contact Me</h2>
+    <div class="contact-box">
+      <form action="mailto:abdohussin026@gmail.com" method="post" enctype="text/plain">
+        <input type="text" name="name" placeholder="Your Name" required />
+        <input type="email" name="email" placeholder="Your Email" required />
+        <textarea name="message" rows="5" placeholder="Your Message..." required></textarea>
+        <button type="submit" class="btn">Send Message</button>
+      </form>
+    </div>
+  </section>
+  <footer>
+    &copy; 2025 Alhussain Abdo. All rights reserved.
+  </footer>
+  <script>
+    window.addEventListener("load", () => {
+      const preloader = document.getElementById("preloader");
+      setTimeout(() => {
+        preloader.style.opacity = "0";
+        preloader.style.pointerEvents = "none";
+      }, 500);
+    });
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('show');
+        }
+      });
+    });
+    document.querySelectorAll('section').forEach(section => {
+      observer.observe(section);
+    });
+    const toggleBtn = document.getElementById("modeToggle");
+    const body = document.body;
+    if (localStorage.getItem("theme") === "dark") {
+      body.classList.add("dark");
+      toggleBtn.textContent = "☀️ Light Mode";
+    }
+    toggleBtn.addEventListener("click", () => {
+      body.classList.toggle("dark");
+      const darkMode = body.classList.contains("dark");
+      toggleBtn.textContent = darkMode ? "☀️ Light Mode" : "🌙 Dark Mode";
+      localStorage.setItem("theme", darkMode ? "dark" : "light");
+    });
+  </script>
+</body>
+</html>
